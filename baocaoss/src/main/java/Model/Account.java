@@ -10,6 +10,12 @@ public class Account {
         this.password = password;
     }
 
+    public Account(int accountID, String username, String password) {
+        this.accountID = accountID;
+        this.username = username;
+        this.password = password;
+    }
+
     public int getAccountID() {
         return accountID;
     }

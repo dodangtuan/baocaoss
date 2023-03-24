@@ -15,16 +15,15 @@ public class App {
         EmployeeService empSV = new EmployeeService();
         DeparmentService dpmSV = new DeparmentService();
 
+        System.out.println("Xin moi dang nhap !");
+
+        accSV.Login();
+
         System.out.println("                                    ");
         System.out.println("***✿ ❀ ❁  QUAN LY NHAN SU ✿ ❀ ❁ ***:");
 
         boolean cond = true;
         do {
-
-            System.out.println("Xin moi dang nhap !");
-
-//            accSV.Login();
-
             System.out.println("1. Danh sách nhân viên");
             System.out.println("2. Thêm nhân viên ");
             System.out.println("3. Cập nhật nhân viên ");
