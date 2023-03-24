@@ -10,10 +10,14 @@ create table Accounts(
 
 INSERT INTO Accounts(username,password)
 VALUES ('Nguyet','123456'),
-('Phu','123456');
+('Phu','123456'),
+('Tuan','123456'),
+('Huynv','123456'),
+('admin','123456');
 
 
 select * from Accounts;
+
 
 create table Departments(
     deptID int auto_increment primary key,
@@ -22,6 +26,8 @@ create table Departments(
     depManagerID int ,
     isDelete boolean
 );
+
+
 
 INSERT INTO Departments(deptName,deptDesc,depManagerID)
 VALUES ('CNTT','công nghệ thông tin',1);
@@ -45,13 +51,15 @@ create table Employees(
     constraint fk_departmentID foreign key (deptID) references Departments(deptID)
 );
 
-INSERT INTO Employees(fullname,age,gender,email,phone,salary,managerID,deptID)
-VALUES ('Nguyet',7,'123456','uyu','98999',87999,2);
 
 INSERT INTO Employees(fullname, age, gender, email, phone, salary, managerID, deptID,isDelete)
-VALUES ('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, 3, Null,1);
+VALUES ('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1),
+('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1),
+('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1);
+
 
 select*from employees;
+
 
 
 
