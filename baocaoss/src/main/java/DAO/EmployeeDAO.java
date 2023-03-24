@@ -464,7 +464,8 @@ public class EmployeeDAO {
 
 //        double personalIncomeTax = (salary * taxRate) - deduction;
         double personalIncomeTax = (salary * taxRate);
-        System.out.println("Thuế thu nhập cá nhân của nhân viên có mã " + employeeID + " là: " + personalIncomeTax + " VNĐ.");
+//        System.out.printf("Thuế thu nhập cá nhân của nhân viên có mã " + employeeID + " là: " + personalIncomeTax + " VNĐ.");
+        System.out.printf("Thuế thu nhập cá nhân của nhân viên có mã %s là: %.3f VNĐ.\n", employeeID, personalIncomeTax);
         return personalIncomeTax;
     }
 
