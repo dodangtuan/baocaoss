@@ -71,6 +71,9 @@ public class DepartmentDAO {
                 );
                 ls.add(department);  // lưu theo hàng vào list ls
             }
+            if (ls.isEmpty()) {
+                System.out.println("Không tồn tại phòng ban nào.");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

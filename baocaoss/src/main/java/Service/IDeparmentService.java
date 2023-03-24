@@ -9,5 +9,4 @@ public interface IDeparmentService {
     void updateDepartment() ;
     void deleteDepartment() ;
 
-//    void updateDeptIDNull();
 }

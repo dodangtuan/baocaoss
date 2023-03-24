@@ -86,6 +86,9 @@ public class EmployeeDAO {
 
                 ls.add(employees);  // lưu theo hàng vào list ls
             }
+            if (ls.isEmpty()) {
+                System.out.println("Không tồn tại nhân viên nào.");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -464,6 +467,8 @@ public class EmployeeDAO {
         System.out.println("Thuế thu nhập cá nhân của nhân viên có mã " + employeeID + " là: " + personalIncomeTax + " VNĐ.");
         return personalIncomeTax;
     }
+
+
 
 
 

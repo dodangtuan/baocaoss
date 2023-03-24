@@ -24,6 +24,7 @@ public class App {
 
         boolean cond = true;
         do {
+            System.out.println("                       ");
             System.out.println("1. Danh sách nhân viên");
             System.out.println("2. Thêm nhân viên ");
             System.out.println("3. Cập nhật nhân viên ");
