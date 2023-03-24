@@ -101,7 +101,7 @@ public class App {
                     break;
                 case 14:
                     System.out.println("Tính thuế của nhân viên");
-
+                    empSV.calculatePersonalIncomeTax();
                     break;
                 case 15:
                     System.out.println("Dung chuong trinh");

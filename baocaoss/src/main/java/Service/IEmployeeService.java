@@ -14,5 +14,6 @@ public interface IEmployeeService {
  void searchEmployee();
  void addEmployeeToDepartment();
  void removeEmployeeFromDepartment();
+ void calculatePersonalIncomeTax();
 
 }

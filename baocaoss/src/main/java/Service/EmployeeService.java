@@ -1,5 +1,7 @@
 package Service;
+import DAO.DepartmentDAO;
 import DAO.EmployeeDAO;
+import Model.Department;
 import Model.Employees;
 
 import java.sql.Connection;
@@ -13,10 +15,12 @@ import java.util.Scanner;
 
 public class EmployeeService implements IEmployeeService {
     public EmployeeDAO employeeDAO;
+    public DepartmentDAO departmentDAO;
     public static Scanner sc = new Scanner(System.in);
     public EmployeeService() {
         employeeDAO = new EmployeeDAO();
-    }
+        departmentDAO = new DepartmentDAO();
+    };
 
     public void addEmployee() throws ParseException {
         List<Employees> employees = new ArrayList<>();
@@ -32,9 +36,9 @@ public class EmployeeService implements IEmployeeService {
         String phone = sc.nextLine();
         System.out.print("Salary: ");
         Double salary = Double.parseDouble(sc.nextLine());
-        System.out.print("Manager ID: ");
+        System.out.print("Manager ID(0 == null): ");
         int managerID = Integer.parseInt(sc.nextLine());
-        System.out.print("Department ID: ");
+        System.out.print("Department ID(0 == null): ");
         int deptID = Integer.parseInt(sc.nextLine());
 
 
@@ -196,6 +200,11 @@ public class EmployeeService implements IEmployeeService {
         System.out.print("Nhập mã phòng ban: ");
         Integer deptID = Integer.parseInt(sc.nextLine());
 
+        Department dept = departmentDAO.showDepartmentById(deptID);
+        if (dept == null) {
+            System.out.println("Không tồn tại mã phòng ban: " + deptID);
+            return;
+        }
         Employees emp2 = employeeDAO.addEmployeeToDepartment(employeeID,deptID);
 
         System.out.println("=====Thêm nhân viên vào phòng ban số " +deptID+ " thành công=====");
@@ -219,6 +228,22 @@ public class EmployeeService implements IEmployeeService {
             System.out.println("=====Xoá nhân viên khỏi phòng ban số "+" thành công=====");
             Employees emp2 = employeeDAO.showEmployeeById(employeeID);
             System.out.println(emp2.toString());
+    }
+
+    //Tính thuế thu nhập
+
+    @Override
+    public void calculatePersonalIncomeTax() {
+        System.out.print("Nhập mã nhân viên cần tính thuế: ");
+        Integer employeeID = Integer.parseInt(sc.nextLine());
+        Employees emp = employeeDAO.showEmployeeById(employeeID);
+        if (emp == null) {
+            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            return;
+        }
+        System.out.println(emp.toString());
+        double emp1 = employeeDAO.calculatePersonalIncomeTax(employeeID);
+
     }
 }
 

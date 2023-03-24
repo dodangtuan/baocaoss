@@ -133,6 +133,13 @@ public class EmployeeDAO {
             // cập nhật danh sách nhân viên mới nhất từ CSDL
             conn = Connect.getInstance().getConnection();
             prst = conn.createStatement();
+
+            // Cập nhật managerID quản lý của các nhân viên cần xóa thành NULL
+            String sqlUpdateEmployees = "UPDATE employees SET managerID = NULL WHERE managerID = " + employeeID;
+            prst = conn.createStatement();
+            prst.executeUpdate(sqlUpdateEmployees);
+
+            //Xóa đổi trạng thái nhân viên thành false
 //          String sql = "DELETE FROM employees WHERE employeeID =" + employeeID;
             String sql = "UPDATE employees SET isDelete = 0 WHERE isDelete = 1 AND employeeID =" + employeeID;
             int rowsAffected = prst.executeUpdate(sql);
@@ -369,6 +376,94 @@ public class EmployeeDAO {
         return null;
     }
 
+//    Thuế thu nhập cá nhân = Lương cơ bản * tỷ lệ thuế
+//
+//    Trong đó, tỷ lệ thuế được xác định hiện hành được áp dụng như sau:
+//    Từ 0 đồng đến 5 triệu đồng: 5%
+//    Từ 5 triệu đồng đến 10 triệu đồng: 10%
+//    Từ 10 triệu đồng đến 18 triệu đồng: 15%
+//    Từ 18 triệu đồng đến 32 triệu đồng: 20%
+//    Từ 32 triệu đồng đến 52 triệu đồng: 25%
+//    Từ 52 triệu đồng đến 80 triệu đồng: 30%
+//    Trên 80 triệu đồng: 35%
+
+
+//    public Employees calculatePersonalIncomeTax(int employeeID) {
+//        Connection conn = null;
+//        Statement stmt = null;
+//        try {
+//            conn = Connect.getInstance().getConnection();
+//            stmt = conn.createStatement();
+//            String sql = "SELECT * FROM employees WHERE isDelete = 1 AND employeeID = " + employeeID;
+//            ResultSet rs = stmt.executeQuery(sql);
+//            Employees emp = null;
+//            while (rs.next()) {
+//                String fullName = rs.getString("fullName");
+//                Integer age = rs.getInt("age");
+//                String gender = rs.getString("gender");
+//                String email = rs.getString("email");
+//                String phone = rs.getString("phone");
+//                Double salary = rs.getDouble("salary");
+//                Integer managerID = rs.getInt("managerID");
+//                Integer deptID = rs.getInt("deptID");
+//                emp = new Employees(employeeID, fullName, age, gender, email, phone, salary, managerID, deptID);
+//
+//                System.out.println("L" + salary);
+//            }
+//            return emp;
+//        } catch (Exception s) {
+//            throw new RuntimeException(s);
+//        } finally {
+//            if (stmt != null) {
+//                try {
+//                    stmt.close();
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//    }
+
+    public double calculatePersonalIncomeTax(int employeeID) {
+        double taxRate = 0.0;
+//        double deduction = 11000000.0; // Giảm trừ cá nhân hàng tháng
+
+        Employees emp = showEmployeeById(employeeID);
+        if (emp == null) {
+            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            return 0.0;
+        }
+
+        double salary = emp.getSalary();
+
+        if (salary <= 5000000) {
+            taxRate = 0.05;
+        } else if (salary <= 10000000) {
+            taxRate = 0.1;
+        } else if (salary <= 18000000) {
+            taxRate = 0.15;
+        } else if (salary <= 32000000) {
+            taxRate = 0.2;
+        } else if (salary <= 52000000) {
+            taxRate = 0.25;
+        } else if (salary <= 80000000) {
+            taxRate = 0.3;
+        } else {
+            taxRate = 0.35;
+        }
+
+//        double personalIncomeTax = (salary * taxRate) - deduction;
+        double personalIncomeTax = (salary * taxRate);
+        System.out.println("Thuế thu nhập cá nhân của nhân viên có mã " + employeeID + " là: " + personalIncomeTax + " VNĐ.");
+        return personalIncomeTax;
+    }
 
 
 

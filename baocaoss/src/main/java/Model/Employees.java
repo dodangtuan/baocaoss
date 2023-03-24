@@ -35,6 +35,16 @@ public class Employees {
         this.deptID = deptID;
     }
 
+    public Employees(int employeeID, String fullName, int age, String gender, String email, String phone, Double salary) {
+        this.employeeID = employeeID;
+        this.fullName = fullName;
+        this.age = age;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.salary = salary;
+    }
+
     public Employees() {
 
     }
@@ -113,7 +123,7 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Employee {" +
                 "employeeID=" + employeeID +
                 ", fullName='" + fullName + '\'' +
                 ", age=" + age +
