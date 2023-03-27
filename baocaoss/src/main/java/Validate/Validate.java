@@ -8,18 +8,20 @@ public class Validate {
         int age = 0;
         boolean isValid = false;
         do {
-//            System.out.print("Nhap tuoi (18-100): ");
+//            System.out.print("Nhap tuoi (18-60): ");
             String input = sc.nextLine().trim();
             if (input.length() <= 10) {
                 try {
                     age = Integer.parseInt(input);
-                    if (age >= 18 && age <= 100) {
+                    if (age >= 18 && age <= 60) {
                         isValid = true;
                     } else {
-                        System.out.println("Tuoi phai tu 18-100");
+                        System.out.println("Tuoi phai tu 18-60");
+                        System.out.print("Vui long nhap lai: ");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Khong dung dinh dang, tuoi phai dang so");
+                    System.out.print("Vui long nhap lai: ");
                 }
             }
         } while (!isValid);
@@ -41,9 +43,11 @@ public class Validate {
                     isValid = true;
                 } catch (NumberFormatException e) {
                     System.out.println("SDT phai dang so");
+                    System.out.print("Vui long nhap lai: ");
                 }
             } else {
                 System.out.println("SDT phai du 10 ky tu so");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return phoneNumber;
@@ -66,6 +70,7 @@ public class Validate {
             }
             if (!isValid) {
                 System.out.println("Email phai dinh dang: 'name@domain.com'.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return email;
@@ -86,9 +91,11 @@ public class Validate {
                     isValid = true;
                 } else {
                     System.out.println("Luong phai la so duong.");
+                    System.out.print("Vui long nhap lai: ");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Luong phai dang so.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return salary;
@@ -104,7 +111,8 @@ public class Validate {
                 gender = input;
                 isValid = true;
             } else {
-                System.out.println("Invalid input. Gender must only contain letters.");
+                System.out.println("Sai dinh dang, gioi tinh nam/nu.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return gender;
@@ -122,6 +130,7 @@ public class Validate {
                 isValid = true;
             } else {
                 System.out.println("Sai dinh dang, chi nhap so duong.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return managerID;
@@ -139,6 +148,7 @@ public class Validate {
                 isValid = true;
             } else {
                 System.out.println("Sai dinh dang, deptID phai dang so duong.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return deptID;
@@ -157,6 +167,7 @@ public class Validate {
                 isValid = true;
             } else {
                 System.out.println("Ma nhan vien phai dang so duong.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (!isValid);
         return employeeID;
@@ -170,10 +181,12 @@ public class Validate {
             while (!scanner.hasNextInt()) {
                 System.out.println("Lỗi: Vui lòng nhập số nguyên.");
                 scanner.next();
+                System.out.print("Vui long nhap lai: ");
             }
             input = scanner.nextInt();
             if (input <= 0) {
                 System.out.println("Lỗi: Vui lòng nhập số nguyên lớn hơn 0.");
+                System.out.print("Vui long nhap lai: ");
             }
         } while (input <= 0);
         return input;

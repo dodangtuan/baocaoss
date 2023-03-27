@@ -134,12 +134,12 @@ public class EmployeeService implements IEmployeeService {
                     emp.setSalary(salary);
                     break;
                case 7:
-                    System.out.print("Manager: ");
+                    System.out.print("ManagerID( 0==null ): ");
                    int managerID = getValidManagerID(sc);
                    emp.setManagerID(managerID);
                     break;
                case 8:
-                    System.out.print("DeptID: ");
+                    System.out.print("DeptID( 0==null ): ");
                     int deptID = getValidDeptID(sc);
                     emp.setDeptID(deptID);
                     break;
@@ -195,6 +195,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void addEmployeeToDepartment() {
+        getAllEmployees();
         System.out.print("Nhap ma nhan vien: ");
         Integer employeeID = getValidEmployeeID(sc);
 
@@ -223,6 +224,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void removeEmployeeFromDepartment() {
+            getAllEmployees();
             System.out.print("Nhap ma nhan vien: ");
             Integer employeeID = getValidEmployeeID(sc);
             Employees emp = employeeDAO.showEmployeeById(employeeID);

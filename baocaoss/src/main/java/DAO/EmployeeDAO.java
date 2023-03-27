@@ -432,6 +432,10 @@ public class EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        // Trả về danh sách rỗng nếu không có nhân viên
+        if (employees.isEmpty()) {
+            System.out.println("Khong co nhan vien nao trong phong ban.");
+        }
         return employees;
     }
 

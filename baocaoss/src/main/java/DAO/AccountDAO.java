@@ -23,13 +23,13 @@ public class AccountDAO {
             ResultSet rs = stmt.executeQuery(sql);
             Account s = null;
             if (rs.next()) {
-                System.out.println("Đăng nhập thành công !");
+                System.out.println("Dang nhap thanh cong !");
                 // đánh dấu trạng thái đăng nhập là true
                 loggedIn = true;
                 // tạo đối tượng Account và trả về nó
                 s = new Account(rs.getInt("AccountID"), rs.getString("username"), rs.getString("password"));
             } else {
-                System.out.println("Tài khoản đăng nhập không tồn tại hoặc sai thông tin đăng nhập !");
+                System.out.println("Tai khoan dang nhap khong ton tai hoac sai thong tin dang nhap !");
                 System.out.println("Invalid username or password !");
             }
             return s;
@@ -52,17 +52,17 @@ public class AccountDAO {
             }
             if (!loggedIn) {
                 // Hiển thị thông báo lỗi tài khoản hoặc mật khẩu và hỏi người dùng có muốn tiếp tục đăng nhập không
-                System.out.println("Tài khoản hoặc mật khẩu không chính xác.");
+                System.out.println("Tai khoan hoac mat khau khong chinh xac.");
                 Scanner sc = new Scanner(System.in);
                 String response;
                 do {
-                    System.out.print("Bạn có muốn đăng nhập lại không? (y/n) ");
+                    System.out.print("Ban co muon dang nhap lai khong ? (y/n) ");
                     response = sc.nextLine();
                 } while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n"));
                 if (response.equalsIgnoreCase("y")) {
-                    System.out.print("Tên đăng nhập: ");
+                    System.out.print("Username: ");
                     name = sc.nextLine();
-                    System.out.print("Mật khẩu: ");
+                    System.out.print("Password: ");
                     password = sc.nextLine();
                     // gọi lại hàm login với thông tin đăng nhập mới
                     return login(name, password);
@@ -70,7 +70,7 @@ public class AccountDAO {
                     // Hỏi người dùng có muốn thoát chương trình không
                     String exitResponse;
                     do {
-                        System.out.print("Bạn có muốn thoát chương trình không? (y/n) ");
+                        System.out.print("Ban co muon thoat chuong trinh khong ? (y/n) ");
                         exitResponse = sc.nextLine();
                     } while (!exitResponse.equalsIgnoreCase("y") && !exitResponse.equalsIgnoreCase("n"));
                     if (exitResponse.equalsIgnoreCase("y")) {
