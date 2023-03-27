@@ -1,8 +1,8 @@
-create database employeeManager;
+create database IF NOT EXISTS employeeManager;
 use employeeManager;
 
 
-create table Accounts(
+create table IF NOT EXISTS Accounts(
    AccountID int auto_increment primary key,
    UserName varchar(255),
    Password varchar(255)
@@ -12,14 +12,11 @@ INSERT INTO Accounts(username,password)
 VALUES ('Nguyet','123456'),
 ('Phu','123456'),
 ('Tuan','123456'),
-('Huynv','123456'),
+('Huy','123456'),
 ('admin','123456');
 
 
-select * from Accounts;
-
-
-create table Departments(
+create table IF NOT EXISTS Departments(
     deptID int auto_increment primary key,
 	deptName varchar(255),
 	deptDesc varchar(255),
@@ -28,14 +25,16 @@ create table Departments(
 );
 
 
+INSERT INTO Departments(deptName,deptDesc,depManagerID,isDelete)
+VALUES 
+('CNTT','Công nghệ thông tin',null,1),
+('HR','Nhân sự',null,1),
+('KT','Kỹ thuật',null,1),
+('MKT','Marketing',null,1);
 
-INSERT INTO Departments(deptName,deptDesc,depManagerID)
-VALUES ('CNTT','công nghệ thông tin',1);
-
-select * from Departments;
 
 
-create table Employees(
+create table IF NOT EXISTS Employees(
     employeeID int auto_increment,
 	fullname varchar(255),
     age int,
@@ -47,19 +46,14 @@ create table Employees(
     deptID int null,
     isDelete boolean,
     primary key (employeeID),
- --    CONSTRAINT FK_managerID FOREIGN KEY (managerID) REFERENCES employees(employeeID),
     constraint fk_departmentID foreign key (deptID) references Departments(deptID)
 );
 
 
 INSERT INTO Employees(fullname, age, gender, email, phone, salary, managerID, deptID,isDelete)
-VALUES ('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1),
-('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1),
-('Nguyet', 7, 'female', 'uyu@example.com', '98999', 87999, null, Null,1);
-
-
-select*from employees;
-
-
-
-
+VALUES 
+('Nguyet', 27, 'nu', 'nguyet@gmail.com', '0944563456', 15000000, null, Null,1),
+('Huy', 22, 'nam', 'huy@gmail.com', '0343453838', 14000000, null, Null,1),
+('Tuan', 23, 'nam', 'tuan@gmail.com', '0396456345', 14500000, null, Null,1),
+('Hoang', 21, 'nam', 'hoang@gmail.com', '2302302230', 12000000, null, Null,1),
+('Phu', 21, 'nam', 'phu@gmail.com', '1900100221', 122000000, null, Null,1);
