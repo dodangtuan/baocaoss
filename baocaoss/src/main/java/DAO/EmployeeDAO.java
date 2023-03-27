@@ -87,7 +87,7 @@ public class EmployeeDAO {
                 ls.add(employees);  // lưu theo hàng vào list ls
             }
             if (ls.isEmpty()) {
-                System.out.println("Không tồn tại nhân viên nào.");
+                System.out.println("Khong ton tai nhan vien nao.");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -104,29 +104,6 @@ public class EmployeeDAO {
     }
 
     //Xóa nhân viên
-
-//    public Employees deleteEmployee(int employeeID) {
-//        Connection conn = null;
-//        Statement prst = null;
-//        try {
-//            conn = Connect.getInstance().getConnection();
-//            prst = conn.createStatement();
-//            String sql = "DELETE FROM employees WHERE employeeID =" + employeeID;
-//            prst.executeUpdate(sql);
-//            System.out.println("Xóa thành công nhân viên có id :" + employeeID);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if(conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//        return null;
-//    }
 
     public Employees deleteEmployee(int employeeID) {
         Connection conn = null;
@@ -147,9 +124,9 @@ public class EmployeeDAO {
             String sql = "UPDATE employees SET isDelete = 0 WHERE isDelete = 1 AND employeeID =" + employeeID;
             int rowsAffected = prst.executeUpdate(sql);
             if (rowsAffected == 0) {
-                System.out.println("Không tồn tại nhân viên với id: " + employeeID);
+                System.out.println("Khong ton tai nhan vien nao co id: " + employeeID);
             } else {
-                System.out.println("Xóa thành công nhân viên có id: " + employeeID);
+                System.out.println("Xoa thanh cong nhan vien co id: " + employeeID);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -165,6 +142,7 @@ public class EmployeeDAO {
         return null;
     }
 
+    //update thông tin
     public Employees updateEmployee(int employeeID, Employees emp) {
         Connection conn = null;
         PreparedStatement prst = null;
@@ -288,50 +266,8 @@ public class EmployeeDAO {
         return employees;
     }
 
-    //xóa nhân viên khỏi phòng ban
-//    public removeEmployeeFromDepartment(int employeeID, int deptID) {
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        try {
-//            conn = Connect.getInstance().getConnection();
-//            String sql = "SELECT * FROM Employees WHERE EmployeeID = ? AND DeptID = ?";
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, employeeID);
-//            pstmt.setInt(2, deptID);
-//            ResultSet rs = pstmt.executeQuery();
-//            if (!rs.next()) {
-//                // Nếu nhân viên không tồn tại trong phòng ban
-//                System.out.println("Nhân viên không tồn tại trong phòng ban.");
-//            } else {
-//                // Nếu nhân viên tồn tại trong phòng ban, xóa nhân viên khỏi phòng ban
-//                sql = "DELETE FROM Employees WHERE EmployeeID = ? AND DeptID = ?";
-//                pstmt = conn.prepareStatement(sql);
-//                pstmt.setInt(1, employeeID);
-//                pstmt.setInt(2, deptID);
-//                pstmt.executeUpdate();
-//                System.out.println("Nhân viên đã được xóa khỏi phòng ban thành công.");
-//            }
-//        } catch (SQLException ex) {
-//            throw new RuntimeException(ex);
-//        } finally {
-//            if (pstmt != null) {
-//                try {
-//                    pstmt.close();
-//                } catch (SQLException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//        }
-//    }
 
-    public Employees addEmployeeToDepartment(int empID, int deptID ) {
+    public Employees addEmployeeToDepartment(int empID, int deptID) {
         Connection conn = null;
         PreparedStatement prst = null;
         try {
@@ -355,7 +291,7 @@ public class EmployeeDAO {
         return null;
     }
 
-
+    //xóa nhân viên khỏi phòng ban
     public Employees removeEmployeeFromDepartment(int employeeID) {
         Connection conn = null;
         PreparedStatement prst = null;
@@ -391,56 +327,13 @@ public class EmployeeDAO {
 //    Trên 80 triệu đồng: 35%
 
 
-//    public Employees calculatePersonalIncomeTax(int employeeID) {
-//        Connection conn = null;
-//        Statement stmt = null;
-//        try {
-//            conn = Connect.getInstance().getConnection();
-//            stmt = conn.createStatement();
-//            String sql = "SELECT * FROM employees WHERE isDelete = 1 AND employeeID = " + employeeID;
-//            ResultSet rs = stmt.executeQuery(sql);
-//            Employees emp = null;
-//            while (rs.next()) {
-//                String fullName = rs.getString("fullName");
-//                Integer age = rs.getInt("age");
-//                String gender = rs.getString("gender");
-//                String email = rs.getString("email");
-//                String phone = rs.getString("phone");
-//                Double salary = rs.getDouble("salary");
-//                Integer managerID = rs.getInt("managerID");
-//                Integer deptID = rs.getInt("deptID");
-//                emp = new Employees(employeeID, fullName, age, gender, email, phone, salary, managerID, deptID);
-//
-//                System.out.println("L" + salary);
-//            }
-//            return emp;
-//        } catch (Exception s) {
-//            throw new RuntimeException(s);
-//        } finally {
-//            if (stmt != null) {
-//                try {
-//                    stmt.close();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-//    }
-
     public double calculatePersonalIncomeTax(int employeeID) {
         double taxRate = 0.0;
 //        double deduction = 11000000.0; // Giảm trừ cá nhân hàng tháng
 
         Employees emp = showEmployeeById(employeeID);
         if (emp == null) {
-            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            System.out.println("Khong ton tai nhan vien co ma: " + employeeID);
             return 0.0;
         }
 
@@ -465,9 +358,83 @@ public class EmployeeDAO {
 //        double personalIncomeTax = (salary * taxRate) - deduction;
         double personalIncomeTax = (salary * taxRate);
 //        System.out.printf("Thuế thu nhập cá nhân của nhân viên có mã " + employeeID + " là: " + personalIncomeTax + " VNĐ.");
-        System.out.printf("Thuế thu nhập cá nhân của nhân viên có mã %s là: %.3f VNĐ.\n", employeeID, personalIncomeTax);
+        System.out.printf("Thue thu nhap ca nhan cua nhan vien ma %s là: %.3f VNĐ.\n", employeeID, personalIncomeTax);
         return personalIncomeTax;
     }
 
-    
+
+    //lâấy ds nhân viên lương cao
+
+    public List<Employees> sortEmployeesBySalaryDescending() {
+        List<Employees> ls = new ArrayList<>();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = getConnection();
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM Employees WHERE isDelete=1 ORDER BY salary DESC;";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Employees employees = new Employees(
+                        rs.getInt("employeeID"),
+                        rs.getString("fullName"),
+                        rs.getInt("age"),// lấy dữ liệu từng cot trong bảng
+                        rs.getString("gender"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getDouble("salary"),
+                        rs.getInt("managerID"),
+                        rs.getInt("deptID"));
+
+                ls.add(employees);  // lưu theo hàng vào list ls
+            }
+            if (ls.isEmpty()) {
+                System.out.println("Khong ton tai nhan vien nao.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return ls;
+    }
+
+    //
+
+    public List<Employees> getEmployeesByDepartmentId(int deptID) {
+        List<Employees> employees = new ArrayList<>();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = Connect.getInstance().getConnection();
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM Employees WHERE isDelete = 1 AND deptID =" + deptID;
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int employeeID = rs.getInt("employeeID");
+                String fullName = rs.getString("fullName");
+                int age = rs.getInt("age");
+                String gender = rs.getString("gender");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                Double salary = rs.getDouble("salary");
+                int managerID = rs.getInt("managerID");
+                Employees emp = new Employees(employeeID, fullName, age, gender, email, phone, salary, managerID, deptID);
+                employees.add(emp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
+    }
+
+
+
 }

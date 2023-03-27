@@ -16,7 +16,7 @@ public class DepartmentDAO {
         PreparedStatement prst = null;
         try {
             conn = Connect.getInstance().getConnection();
-            String sql = "INSERT INTO departments(deptName,deptDesc,depManagerID) VALUES (?,?,?)";
+            String sql = "INSERT INTO departments(deptName,deptDesc,depManagerID ,isDelete) VALUES (?,?,?,true)";
             prst = conn.prepareStatement(sql);
             for(Department dpm : departments) {
                 prst.setString(1,dpm.getDeptName());
@@ -59,7 +59,7 @@ public class DepartmentDAO {
         try {
             conn = getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM Departments";
+            String sql = "SELECT * FROM Departments WHERE isDelete = 1";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()){
@@ -72,7 +72,7 @@ public class DepartmentDAO {
                 ls.add(department);  // lưu theo hàng vào list ls
             }
             if (ls.isEmpty()) {
-                System.out.println("Không tồn tại phòng ban nào.");
+                System.out.println("Khong ton tai phong ban.");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -96,7 +96,7 @@ public class DepartmentDAO {
         try {
             conn = Connect.getInstance().getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM Departments WHERE deptID = " + deptID;
+            String sql = "SELECT * FROM Departments  WHERE isDelete = 1 AND deptID = " + deptID;
             ResultSet rs = stmt.executeQuery(sql);
             Department dpm = null;
             while(rs.next()) {
@@ -143,11 +143,12 @@ public class DepartmentDAO {
             stmt.executeUpdate(sqlUpdateEmployees);
 
             // Xóa phòng ban đó
-            String sqlDeleteDepartment = "DELETE FROM Departments WHERE deptID = " + deptID;
+//            String sqlDeleteDepartment = "DELETE FROM Departments WHERE deptID = " + deptID;
+            String sqlDeleteDepartment = "UPDATE Departments SET isDelete = 0 WHERE isDelete = 1 AND deptID = " + deptID;
             stmt.executeUpdate(sqlDeleteDepartment);
 
             conn.commit(); // commit transaction
-            System.out.println("Xóa phòng ban có id " + deptID + " thành công");
+            System.out.println("Xoa phong ban có id " + deptID + " thành công");
         } catch (SQLException e) {
             try {
                 if (conn != null) {
@@ -156,20 +157,20 @@ public class DepartmentDAO {
             } catch (SQLException ex) {
                 throw new RuntimeException("Không thể rollback transaction: " + ex.getMessage());
             }
-            throw new RuntimeException("Xóa phòng ban thất bại: " + e.getMessage());
+            throw new RuntimeException("Xoa phong ban that bai: " + e.getMessage());
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
-                    throw new RuntimeException("Không thể đóng statement: " + e.getMessage());
+                    throw new RuntimeException("Khong the dong statement: " + e.getMessage());
                 }
             }
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) {
-                    throw new RuntimeException("Không thể đóng kết nối: " + e.getMessage());
+                    throw new RuntimeException("Khong the dong ket noi: " + e.getMessage());
                 }
             }
         }
@@ -204,7 +205,7 @@ public class DepartmentDAO {
             prst.setInt(4, deptID);
 
             prst.executeUpdate();
-            System.out.println(prst.toString());
+//            System.out.println(prst.toString());
             prst.executeUpdate();
         } catch (Exception ex) {
             throw new RuntimeException(ex);

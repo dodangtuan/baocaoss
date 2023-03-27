@@ -5,6 +5,8 @@ import Service.EmployeeService;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import static Validate.Validate.getValidInput;
+
 public class App {
 
 
@@ -25,85 +27,96 @@ public class App {
         boolean cond = true;
         do {
             System.out.println("                       ");
-            System.out.println("1. Danh sách nhân viên");
-            System.out.println("2. Thêm nhân viên ");
-            System.out.println("3. Cập nhật nhân viên ");
-            System.out.println("4. Xóa nhân viên ");
-            System.out.println("5. Thông tin nhân viên theo ID ");
-            System.out.println("6. Tìm nhân viên theo tên/sdt/email ");
-            System.out.println("7. Thêm nhân viên/chuyển vào phòng ban ");
-            System.out.println("8. Xóa nhân viên khỏi phòng ban ");
-            System.out.println("9. Thêm phòng ban ");
-            System.out.println("10. Danh sách phòng ban ");
-            System.out.println("11. Xóa phòng ban ");
-            System.out.println("12. Sửa phòng ban ");
-            System.out.println("13. DS phòng ban theo ID ");
+            System.out.println("1. Danh sach nhan vien");
+            System.out.println("2. Them nhan vien ");
+            System.out.println("3. Cap nhat nhan vien ");
+            System.out.println("4. Xoa nhan vien ");
+            System.out.println("5. Thong tin nhan vien theo ID ");
+            System.out.println("6. Tim nhan vien theo ten/sdt/email ");
+            System.out.println("7. Them nhan vien/chuyen vao phong ban ");
+            System.out.println("8. Xoa nhan vien khoi phong ban ");
+            System.out.println("9. Them phong ban ");
+            System.out.println("10. Danh sach phong ban ");
+            System.out.println("11. Xoa phong ban ");
+            System.out.println("12. Sua phong ban ");
+            System.out.println("13. DS phong ban theo ID ");
             System.out.println("14. Tinh thue cua nhan vien ");
+
+            System.out.println("15. DS nhan vien co luong cao->thap");
+            System.out.println("16. DS nhan vien theo phong ban");
 
             System.out.println("15. Thoat chuong trinh.");
             System.out.println("===========================");
-            System.out.print("Mời nhập lựa chọn : ");
+            System.out.print("Moi nhap lua chon : ");
 
-            int chon = Integer.parseInt(sc.nextLine());
+            int chon = getValidInput(sc);
 
             switch (chon) {
                 case 1:
-                    System.out.println("Danh sách nhân viên");
+                    System.out.println("Danh sach nhan vien");
                     empSV.getAllEmployees();
                     break;
                 case 2:
-                    System.out.println("Thêm nhân viên");
+                    System.out.println("Them nhan vien");
                     empSV.addEmployee();
                     break;
                 case 3:
-                    System.out.println("Cập nhật nhân viên");
+                    System.out.println("Cap nhat nhan vien");
                     empSV.updateEmployee();
                     break;
                 case 4:
-                    System.out.println("Xóa nhân viên");
+                    System.out.println("Xoa nhan vien");
                     empSV.deleteEmployee();
                     break;
                 case 5:
-                    System.out.println("Thông tin nhân viên theo ID");
+                    System.out.println("Thong tin nhan vien theo ID");
                     empSV.showEmployeebyID();
                     break;
                 case 6:
-                    System.out.println("Tìm nhân viên theo tên/sdt/email");
+                    System.out.println("Tim nhan vien theo ten/sdt/email");
                     empSV.searchEmployee();
                     break;
                 case 7:
-                    System.out.println("Thêm nhân viên vào phòng ban");
+                    System.out.println("Them nhan vien vao phong ban");
                     empSV.addEmployeeToDepartment();
                     break;
                 case 8:
-                    System.out.println("Xóa nhân viên khỏi phòng ban");
+                    System.out.println("Xoa nhan vien khoi phong ban");
                     empSV.removeEmployeeFromDepartment();
                     break;
                 case 9:
-                    System.out.println("Thêm phòng ban");
+                    System.out.println("Them phong ban");
                     dpmSV.addDepartment();
                     break;
                 case 10:
-                    System.out.println("Danh sách phòng ban");
+                    System.out.println("Danh sach phong ban");
                     dpmSV.getAllDepartments();
                     break;
                 case 11:
-                    System.out.println("Xóa phòng ban");
+                    System.out.println("Xoa phong ban");
                     dpmSV.deleteDepartment();
                     break;
                 case 12:
-                    System.out.println("Sửa phòng ban");
+                    System.out.println("Sua phong ban");
                     dpmSV.updateDepartment();
                     break;
                 case 13:
-                    System.out.println("ds phòng ban theo id");
+                    System.out.println("Phong ban theo ID");
                     dpmSV.showDepartmentById();
                     break;
                 case 14:
-                    System.out.println("Tính thuế của nhân viên");
+                    System.out.println("Tinh thue cua nhan vien");
                     empSV.calculatePersonalIncomeTax();
                     break;
                 case 15:
+                    System.out.println("DS nhan vien luong cao->thap");
+                    empSV.sortEmployeesBySalaryDescending();
+                    break;
+                case 16:
+                    System.out.println("DS nhan vien theo phong ban");
+                    empSV.getEmployeesByDepartmentId();
+                    break;
+                case 17:
                     System.out.println("Dung chuong trinh");
                     System.exit(0);
                     cond = false;

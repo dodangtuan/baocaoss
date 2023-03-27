@@ -15,5 +15,8 @@ public interface IEmployeeService {
  void addEmployeeToDepartment();
  void removeEmployeeFromDepartment();
  void calculatePersonalIncomeTax();
+ //chức năng thêm
+ void sortEmployeesBySalaryDescending(); // lấy danh sách có nhân viên từ cao xuống thấp
+ void getEmployeesByDepartmentId(); // lấy ds nhân viên theo phng ban
 
 }

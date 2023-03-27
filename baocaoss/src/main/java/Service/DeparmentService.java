@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static Validate.Validate.getValidDeptID;
+import static Validate.Validate.getValidManagerID;
+
 public class DeparmentService implements IDeparmentService{
     public DepartmentDAO departmentDAO;
     public static Scanner sc = new Scanner(System.in);
@@ -33,7 +36,7 @@ public class DeparmentService implements IDeparmentService{
         System.out.print("deptDesc: ");
         String deptDesc = sc.nextLine();
         System.out.print("depManagerID: ");
-        Integer depManagerID = Integer.parseInt(sc.nextLine());
+        Integer depManagerID = getValidManagerID(sc);
 
         Department dpm = new Department(deptName,deptDesc,depManagerID);
         departments.add(dpm);
@@ -42,12 +45,12 @@ public class DeparmentService implements IDeparmentService{
 
     @Override
     public void showDepartmentById() {
-        System.out.print("Nhập mã phòng ban: ");
-        Integer deptID = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhap ma phong ban: ");
+        Integer deptID = getValidDeptID(sc);
 
         Department dpm = departmentDAO.showDepartmentById(deptID);
         if (dpm == null) {
-            System.out.println("Không tồn tại phòng ban có mã " + deptID);
+            System.out.println("Khong ton tai phong ban ma " + deptID);
             return;
         }
 
@@ -56,18 +59,18 @@ public class DeparmentService implements IDeparmentService{
 
     @Override
     public void updateDepartment() {
-            System.out.print("Nhap ma phòng ban can cap nhat : ");
-            Integer deptID = Integer.parseInt(sc.nextLine());
+            System.out.print("Nhap ma phong ban can cap nhat : ");
+            Integer deptID = getValidDeptID(sc);
 
             Department dpm = departmentDAO.showDepartmentById(deptID);
 
             if (dpm == null) {
-                System.out.println("Không tồn tại phòng ban " + deptID);
+                System.out.println("Khong ton tai phong ban " + deptID);
                 return;
             }
 
             // nếu nhân viên không tồn tại trong database
-            System.out.println("Thông tin phòng ban " + deptID + ":");
+            System.out.println("Thong tin phong ban " + deptID + ":");
             System.out.println(dpm.toString());
 
             boolean cond = true;
@@ -91,8 +94,8 @@ public class DeparmentService implements IDeparmentService{
                         dpm.setDeptDesc(deptDesc);
                         break;
                     case 3:
-                        System.out.print("depManagerID: ");
-                        Integer depManagerID = Integer.parseInt(sc.nextLine());
+                        System.out.print("depManagerID(0 == null): ");
+                        Integer depManagerID = getValidManagerID(sc);
                         dpm.setDepManagerID(depManagerID);
                         break;
                     case 4:
@@ -100,7 +103,7 @@ public class DeparmentService implements IDeparmentService{
                         cond = false;
                         break;
                     default:
-                        System.out.println("Mời nhập lựa chọn");
+                        System.out.println("Moi nhap lua chon");
                         break;
                 }
 
@@ -113,8 +116,15 @@ public class DeparmentService implements IDeparmentService{
     @Override
     public void deleteDepartment() {
         getAllDepartments();
-        System.out.print("Nhập mã phòng ban cần xóa : ");
-        Integer deptID = Integer.parseInt(sc.nextLine());
+        Integer deptID = null;
+        do {
+            System.out.print("Nhap ma phong ban can xoa (nhap 0 để thoat): ");
+            deptID = getValidDeptID(sc);
+            if (deptID == 0) {
+                System.out.println("Da thoat khoi chuong trinh.");
+                return;
+            }
+        } while (deptID == null);
         Department dmp = departmentDAO.deleteDepartment(deptID);
     }
 

@@ -123,6 +123,7 @@ public class Employees {
 
     @Override
     public String toString() {
+        long roundedSalary = Math.round(salary);
         return "Employee {" +
                 "employeeID=" + employeeID +
                 ", fullName='" + fullName + '\'' +
@@ -130,7 +131,7 @@ public class Employees {
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", salary=" + salary +
+                ", salary=" + String.valueOf(roundedSalary) +
                 ", managerID=" + managerID +
                 ", deptID=" + deptID +
                 '}';

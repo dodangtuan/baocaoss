@@ -4,14 +4,12 @@ import DAO.EmployeeDAO;
 import Model.Department;
 import Model.Employees;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static Validate.Validate.*;
 
 public class EmployeeService implements IEmployeeService {
     public EmployeeDAO employeeDAO;
@@ -27,19 +25,19 @@ public class EmployeeService implements IEmployeeService {
         System.out.print("FullName: ");
         String fullName = sc.nextLine();
         System.out.print("Age: ");
-        Integer age = Integer.parseInt(sc.nextLine());
+        Integer age = getValidAge(sc);
         System.out.print("Gender: ");
-        String gender = sc.nextLine();
+        String gender = getValidGender(sc);
         System.out.print("Email: ");
-        String email = sc.nextLine();
+        String email = getValidEmail(sc);
         System.out.print("Phone: ");
-        String phone = sc.nextLine();
+        String phone = getValidPhoneNumber(sc);
         System.out.print("Salary: ");
-        Double salary = Double.parseDouble(sc.nextLine());
+        Double salary = getValidSalary(sc);
         System.out.print("Manager ID(0 == null): ");
-        int managerID = Integer.parseInt(sc.nextLine());
+        int managerID = getValidManagerID(sc);
         System.out.print("Department ID(0 == null): ");
-        int deptID = Integer.parseInt(sc.nextLine());
+        int deptID = getValidDeptID(sc);
 
 
         Employees e = new Employees(fullName, age, gender, email, phone,salary,managerID,deptID);
@@ -58,15 +56,22 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void deleteEmployee() {
         getAllEmployees();
-        System.out.print("Nhập mã nhân viên cần xóa : ");
-        Integer employeeID = Integer.parseInt(sc.nextLine());
+        Integer employeeID = null;
+        do {
+            System.out.print("Nhap ma nhan vien (nhap 0 để thoat): ");
+            employeeID = getValidEmployeeID(sc);
+            if (employeeID == 0) {
+                System.out.println("Da thoat khoi chuong trinh.");
+                return;
+            }
+        } while (employeeID == null);
         Employees emp = employeeDAO.deleteEmployee(employeeID);
     }
 
     @Override
     public void updateEmployee() {
         System.out.print("Nhap ma nhan vien can cap nhat : ");
-        Integer employeeID = Integer.parseInt(sc.nextLine());
+        Integer employeeID = getValidEmployeeID(sc);
 
         Employees emp = employeeDAO.showEmployeeById(employeeID);
         if (emp == null) {
@@ -100,38 +105,42 @@ public class EmployeeService implements IEmployeeService {
                     break;
                 case 2:
                     System.out.print("Age: ");
-                    int age = Integer.parseInt(sc.nextLine());
+//                    int age = Integer.parseInt(sc.nextLine());
+//                    emp.setAge(age);
+                    int age = getValidAge(sc);
                     emp.setAge(age);
                     ;
                     break;
                 case 3:
                     System.out.print("Gender: ");
-                    String gender = sc.nextLine();
+                    String gender = getValidGender(sc);
                     emp.setGender(gender);
                     break;
                 case 4:
                     System.out.print("Email: ");
-                    String email = sc.nextLine();
+//                    String email = sc.nextLine();
+                    String email = getValidEmail(sc);
                     emp.setEmail(email);
                     break;
                 case 5:
                     System.out.print("Phone: ");
-                    String phone = sc.nextLine();
+//                    String phone = sc.nextLine();
+                    String phone = getValidPhoneNumber(sc);
                     emp.setEmail(phone);
                     break;
                 case 6:
                     System.out.print("Salary: ");
-                    Double salary = sc.nextDouble();
+                    Double salary = getValidSalary(sc);
                     emp.setSalary(salary);
                     break;
                case 7:
                     System.out.print("Manager: ");
-                   int managerID = Integer.parseInt(sc.nextLine());
+                   int managerID = getValidManagerID(sc);
                    emp.setManagerID(managerID);
                     break;
                case 8:
                     System.out.print("DeptID: ");
-                    int deptID = Integer.parseInt(sc.nextLine());
+                    int deptID = getValidDeptID(sc);
                     emp.setDeptID(deptID);
                     break;
 
@@ -153,11 +162,11 @@ public class EmployeeService implements IEmployeeService {
     //Hiển thị nhân viên theo ID
     @Override
     public void showEmployeebyID() {
-        System.out.print("Nhập mã nhân viên: ");
-        Integer employeeID = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhap ma nhan vien: ");
+        Integer employeeID = getValidEmployeeID(sc);
         Employees emp = employeeDAO.showEmployeeById(employeeID);
         if (emp == null) {
-            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            System.out.println("Khong ton tai nhan vien ma: " + employeeID);
             return;
         }
 
@@ -186,46 +195,46 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void addEmployeeToDepartment() {
-        System.out.print("Nhập mã nhân viên: ");
-        Integer employeeID = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhap ma nhan vien: ");
+        Integer employeeID = getValidEmployeeID(sc);
 
 
         Employees emp1 = employeeDAO.showEmployeeById(employeeID);
         if (emp1 == null) {
-            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            System.out.println("Khong ton tai nhan vien ma: " + employeeID);
             return;
         }
         System.out.println(emp1.toString());
 
-        System.out.print("Nhập mã phòng ban: ");
-        Integer deptID = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhap ma phong ban: ");
+        Integer deptID = getValidDeptID(sc);
 
         Department dept = departmentDAO.showDepartmentById(deptID);
         if (dept == null) {
-            System.out.println("Không tồn tại mã phòng ban: " + deptID);
+            System.out.println("Khong ton tai phong ban co ma: " + deptID);
             return;
         }
         Employees emp2 = employeeDAO.addEmployeeToDepartment(employeeID,deptID);
 
-        System.out.println("=====Thêm nhân viên vào phòng ban số " +deptID+ " thành công=====");
+        System.out.println("=====Them nhan vien vao phong ban so " +deptID+ " thanh cong=====");
         Employees emp3 = employeeDAO.showEmployeeById(employeeID);
         System.out.println(emp3.toString());
     }
 
     @Override
     public void removeEmployeeFromDepartment() {
-            System.out.print("Nhập mã nhân viên: ");
-            Integer employeeID = Integer.parseInt(sc.nextLine());
+            System.out.print("Nhap ma nhan vien: ");
+            Integer employeeID = getValidEmployeeID(sc);
             Employees emp = employeeDAO.showEmployeeById(employeeID);
             if (emp == null) {
-                System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+                System.out.println("Khong ton tai nhan vien ma: " + employeeID);
                 return;
             }
             System.out.println(emp.toString());
 
             employeeDAO.removeEmployeeFromDepartment(employeeID);
 
-            System.out.println("=====Xoá nhân viên khỏi phòng ban số "+" thành công=====");
+            System.out.println("=====Xoa nhan vien khoi phong ban  "+" thanh cong=====");
             Employees emp2 = employeeDAO.showEmployeeById(employeeID);
             System.out.println(emp2.toString());
     }
@@ -234,16 +243,45 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void calculatePersonalIncomeTax() {
-        System.out.print("Nhập mã nhân viên cần tính thuế: ");
-        Integer employeeID = Integer.parseInt(sc.nextLine());
+        System.out.print("Nhap ma nhan vien can tinh thue: ");
+        Integer employeeID = getValidEmployeeID(sc);
         Employees emp = employeeDAO.showEmployeeById(employeeID);
         if (emp == null) {
-            System.out.println("Không tồn tại mã nhân viên: " + employeeID);
+            System.out.println("Khong ton tai ma nhan vien: " + employeeID);
             return;
         }
         System.out.println(emp.toString());
         double emp1 = employeeDAO.calculatePersonalIncomeTax(employeeID);
 
+    }
+
+    @Override
+    public void sortEmployeesBySalaryDescending() {
+        List<Employees> ls = employeeDAO.sortEmployeesBySalaryDescending();
+        for (Employees item : ls) {
+            System.out.println(item.toString());
+        }
+    }
+
+    @Override
+    public void getEmployeesByDepartmentId() {
+        System.out.print("Nhap ma phong ban: ");
+        Integer deptID = getValidDeptID(sc);
+        List<Employees> employees = employeeDAO.getEmployeesByDepartmentId(deptID);
+        Department dept = departmentDAO.showDepartmentById(deptID);
+
+        if (employees == null) {
+            System.out.println("Khong ton tai nhan vien nao trong phong ban");
+            return;
+        }
+        if(dept == null){
+            System.out.println("Khong ton tai phong ban");
+            return;
+        }
+
+        for (Employees emp : employees) {
+            System.out.println(emp.toString());
+        }
     }
 }
 
