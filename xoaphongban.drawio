@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-03-27T06:54:23.860Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="zJnWpkk21CQtOgq3x_Yn" version="21.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-27T07:04:04.472Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="hTIcrAYytbs6Ht4voTx0" version="21.1.1" type="github">
   <diagram name="Page-1" id="1PG1D4QQlFnaMD97lDCO">
     <mxGraphModel dx="1114" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -15,7 +15,7 @@
         <mxCell id="u3JvPehaXIA-mYZSv__7-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.458;exitY=0.978;exitDx=0;exitDy=0;exitPerimeter=0;fontSize=13;fontFamily=Times New Roman;fontStyle=0" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-4" target="u3JvPehaXIA-mYZSv__7-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u3JvPehaXIA-mYZSv__7-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Nhập mã&amp;nbsp; phòng&lt;br&gt;ban muốn xóa&lt;br&gt;&lt;/font&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
+        <mxCell id="u3JvPehaXIA-mYZSv__7-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Nhập mã&amp;nbsp; phòng&lt;br&gt;bandeptID&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;muốn sửa&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
           <mxGeometry x="315" y="170" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="u3JvPehaXIA-mYZSv__7-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=13;fontFamily=Times New Roman;fontStyle=0" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-7">
@@ -45,7 +45,7 @@
           <mxGeometry x="314" y="450" width="106" height="50" as="geometry" />
         </mxCell>
         <mxCell id="u3JvPehaXIA-mYZSv__7-10" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Kết Thúc&lt;/span&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Times New Roman;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="320" y="699.46" width="101" height="50" as="geometry" />
+          <mxGeometry x="316.5" y="1050" width="101" height="50" as="geometry" />
         </mxCell>
         <mxCell id="u3JvPehaXIA-mYZSv__7-11" value="&lt;b&gt;Không&amp;nbsp;&lt;br&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
           <mxGeometry x="435.5" y="315" width="60" height="30" as="geometry" />
@@ -56,8 +56,34 @@
         <mxCell id="u3JvPehaXIA-mYZSv__7-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-14" target="u3JvPehaXIA-mYZSv__7-10">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="u3JvPehaXIA-mYZSv__7-14" value="Hệ thống update trạng thái xóa phòng&lt;br&gt;ban đồng thời chuyển &lt;br&gt;deptID&amp;nbsp;= null trong bảng employees" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
-          <mxGeometry x="309.5" y="580" width="122" height="80" as="geometry" />
+        <mxCell id="u3JvPehaXIA-mYZSv__7-14" value="Hệ thống lưu dữ liệu và hiển thị thông tin vừa nhập" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="305" y="860" width="122" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-18" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-15" target="u3JvPehaXIA-mYZSv__7-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-15" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Chọn trường muốn&lt;br&gt;chỉnh sửa&lt;br&gt;&lt;/font&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="307" y="580" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-19" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-16" target="u3JvPehaXIA-mYZSv__7-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-20" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="u3JvPehaXIA-mYZSv__7-16" target="u3JvPehaXIA-mYZSv__7-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="600" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="500" y="690" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-16" value="Kiểm tra dữ liệu&lt;br&gt;nhập vào" style="rhombus;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Times New Roman;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="312" y="700" width="110" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-21" value="&lt;b&gt;S&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="425" y="725" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="u3JvPehaXIA-mYZSv__7-22" value="&lt;b&gt;Đ&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="365" y="795" width="30" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
