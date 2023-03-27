@@ -120,8 +120,8 @@ public class App {
                         System.out.println("                       ");
                         System.out.println("1. Danh sach phong ban ");
                         System.out.println("2. Them phong ban  ");
-                        System.out.println("4. Cap nhat phong ban ");
-                        System.out.println("3. Xoa phong ban ");
+                        System.out.println("3. Cap nhat phong ban ");
+                        System.out.println("4. Xoa phong ban ");
                         System.out.println("5. DS phong ban theo ID ");
                         System.out.println("6. DS nhan vien theo phong ban");
 
