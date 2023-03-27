@@ -221,5 +221,60 @@ public class DepartmentDAO {
         return dpm;
     }
 
+    //lấy thông tin quản lý
+    public Department DepartmentManagerInfo (int deptID) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = Connect.getInstance().getConnection();
+            stmt = conn.createStatement();
+            String sql =  "SELECT e.fullName as managerName, e.email as managerEmail, e.phone as managerPhone " +
+                    "FROM Departments d " +
+                    "JOIN Employees e ON d.depManagerID = e.employeeID " +
+                    "WHERE d.deptID =" + deptID;
+            ResultSet rs = stmt.executeQuery(sql);
+            Department dpm = null;
+
+//            while(rs.next()) {
+//                String deptName = rs.getString("deptName");
+//                String deptDesc = rs.getString("deptDesc");
+//                Integer depManagerID = rs.getInt("depManagerID");
+//
+//                dpm = new Department(deptID,deptName,deptDesc,depManagerID);
+//            }
+//            return dpm;
+            if(rs.next()) {
+                System.out.println("Quan ly phong " + deptID +":");
+                System.out.println("FullName : " + rs.getString("managerName"));
+                System.out.println("Email : " + rs.getString("managerEmail"));
+                System.out.println("Phone : " + rs.getString("managerPhone"));
+                System.out.println("                                                ");
+
+            } else {
+                System.out.println("Không tìm thấy bộ phận hoặc không có người quản lý.");
+            }
+            return dpm;
+        } catch (Exception s) {
+            throw new RuntimeException(s);
+        } finally {
+            if(stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if(conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+
+    }
+
 
 }

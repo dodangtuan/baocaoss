@@ -6,11 +6,12 @@ import Model.Employees;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static Database.Connect.getConnection;
 
 public class EmployeeDAO {
-
+    public static Scanner sc = new Scanner(System.in);
     //Thêm nhân viên
     public void addEmployee(List<Employees> employees) {
         Connection conn = null;
@@ -105,28 +106,80 @@ public class EmployeeDAO {
 
     //Xóa nhân viên
 
-    public Employees deleteEmployee(int employeeID) {
+//    public Employees deleteEmployee(int employeeID) {
+//        Connection conn = null;
+//        Statement prst = null;
+//        try {
+//
+//            // cập nhật danh sách nhân viên mới nhất từ CSDL
+//            conn = Connect.getInstance().getConnection();
+//            prst = conn.createStatement();
+//
+//            // Cập nhật managerID quản lý của các nhân viên cần xóa thành NULL
+//            String sqlUpdateEmployees = "UPDATE employees SET managerID = NULL WHERE managerID = " + employeeID;
+//            prst = conn.createStatement();
+//            prst.executeUpdate(sqlUpdateEmployees);
+//
+//            //Xóa đổi trạng thái nhân viên thành false
+////          String sql = "DELETE FROM employees WHERE employeeID =" + employeeID;
+//            String sql = "UPDATE employees SET isDelete = 0 WHERE isDelete = 1 AND employeeID =" + employeeID;
+//            int rowsAffected = prst.executeUpdate(sql);
+//            if (rowsAffected == 0) {
+//                System.out.println("Khong ton tai nhan vien nao co id: " + employeeID);
+//            } else {
+//                System.out.println("Xoa thanh cong nhan vien co id: " + employeeID);
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
+    public boolean deleteEmployee(int employeeID) {
         Connection conn = null;
-        Statement prst = null;
+        Statement stmt = null;
         try {
-
-            // cập nhật danh sách nhân viên mới nhất từ CSDL
             conn = Connect.getInstance().getConnection();
-            prst = conn.createStatement();
+            stmt = conn.createStatement();
 
-            // Cập nhật managerID quản lý của các nhân viên cần xóa thành NULL
-            String sqlUpdateEmployees = "UPDATE employees SET managerID = NULL WHERE managerID = " + employeeID;
-            prst = conn.createStatement();
-            prst.executeUpdate(sqlUpdateEmployees);
+            // Kiểm tra xem nhân viên có phải là quản lý của phòng ban nào không
+            String checkManagerQuery = "SELECT deptID, depManagerID FROM Departments WHERE depManagerID = " + employeeID;
+            ResultSet checkManagerResult = stmt.executeQuery(checkManagerQuery);
+            if (checkManagerResult.next()) {
+                int deptID = checkManagerResult.getInt("deptID");
+                int depManagerID = checkManagerResult.getInt("depManagerID");
 
-            //Xóa đổi trạng thái nhân viên thành false
-//          String sql = "DELETE FROM employees WHERE employeeID =" + employeeID;
-            String sql = "UPDATE employees SET isDelete = 0 WHERE isDelete = 1 AND employeeID =" + employeeID;
-            int rowsAffected = prst.executeUpdate(sql);
+                // Hiển thị thông báo xác nhận xóa nhân viên quản lý phòng ban
+                System.out.println("Nhân viên này là quản lý phòng ban. Xóa nhân viên sẽ đặt quản lý phòng ban thành null.");
+                System.out.print("Bạn có chắc chắn muốn xóa nhân viên này? (Y/N) ");
+                Scanner scanner = new Scanner(System.in);
+                String confirmation = scanner.nextLine().toUpperCase();
+
+                if (!confirmation.equals("Y")) {
+                    // Không xóa
+                    return false;
+                }
+
+                // Cập nhật quản lý phòng ban thành null
+                String updateDepartmentManagerQuery = "UPDATE Departments SET depManagerID = NULL WHERE deptID = " + deptID;
+                stmt.executeUpdate(updateDepartmentManagerQuery);
+            }
+
+            // Xóa nhân viên
+            String deleteEmployeeQuery =  "UPDATE Employees SET isDelete = 0, managerID = null WHERE employeeID = " + employeeID;
+            int rowsAffected = stmt.executeUpdate(deleteEmployeeQuery);
             if (rowsAffected == 0) {
-                System.out.println("Khong ton tai nhan vien nao co id: " + employeeID);
+                System.out.println("Không tồn tại nhân viên có ID = " + employeeID);
             } else {
-                System.out.println("Xoa thanh cong nhan vien co id: " + employeeID);
+                System.out.println("Xóa nhân viên có ID = " + employeeID + " thành công");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -139,8 +192,9 @@ public class EmployeeDAO {
                 }
             }
         }
-        return null;
+        return true;
     }
+
 
     //update thông tin
     public Employees updateEmployee(int employeeID, Employees emp) {
@@ -245,7 +299,7 @@ public class EmployeeDAO {
         try {
             conn = Connect.getInstance().getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM employees WHERE isDelete = 1 AND employeeID LIKE '%" + keyword + "%' OR fullName LIKE '%" + keyword + "%' OR phone LIKE '%" + keyword + "%' OR email LIKE '%" + keyword + "%'";
+            String sql = "SELECT * FROM employees WHERE isDelete = 1 AND (employeeID LIKE '%" + keyword + "%' OR fullName LIKE '%" + keyword + "%' OR phone LIKE '%" + keyword + "%' OR email LIKE '%" + keyword + "%')";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 int employeeID = rs.getInt("employeeID");

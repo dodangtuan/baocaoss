@@ -128,4 +128,21 @@ public class DeparmentService implements IDeparmentService{
         Department dmp = departmentDAO.deleteDepartment(deptID);
     }
 
+    //laythongtinquanli
+    @Override
+    public void DepartmentManagerInfo() {
+        getAllDepartments();
+        Integer deptID = null;
+        do {
+            System.out.print("Nhap ma phong ban ( 0 để thoat): ");
+            deptID = getValidDeptID(sc);
+            if (deptID == 0) {
+                System.out.println("Da thoat khoi chuong trinh.");
+                return;
+            }
+        } while (deptID == null);
+        Department dmp = departmentDAO.DepartmentManagerInfo(deptID);
+
+
+    }
 }

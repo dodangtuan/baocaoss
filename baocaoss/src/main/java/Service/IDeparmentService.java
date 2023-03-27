@@ -9,4 +9,7 @@ public interface IDeparmentService {
     void updateDepartment() ;
     void deleteDepartment() ;
 
+    //lấy thông tin quản lý trong phòng ban
+    void DepartmentManagerInfo();
+
 }

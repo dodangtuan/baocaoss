@@ -24,7 +24,6 @@ public class App {
         System.out.println("                                    ");
         System.out.println("***✿ ❀ ❁  QUAN LY NHAN SU ✿ ❀ ❁ ***:");
 
-
         boolean cond = true;
         do {
             System.out.println("                       ");
@@ -108,7 +107,7 @@ public class App {
                                 empSV.getEmployeesByDepartmentId();
                                 break;
                             case 12:
-                                System.out.println("Dung chuong trinh");
+                                System.out.println("Thoat");
                                 cond1 = false;
                                 break;
                         }
@@ -118,17 +117,16 @@ public class App {
                     System.out.println("Phong ban");
                     boolean cond2 = true;
                     do {
-                        System.out.println("1. Them phong ban ");
-                        System.out.println("2. Danh sach phong ban ");
+                        System.out.println("                       ");
+                        System.out.println("1. Danh sach phong ban ");
+                        System.out.println("2. Them phong ban  ");
+                        System.out.println("4. Cap nhat phong ban ");
                         System.out.println("3. Xoa phong ban ");
-                        System.out.println("4. Sua phong ban ");
                         System.out.println("5. DS phong ban theo ID ");
-                        System.out.println("6. Tinh thue cua nhan vien ");
+                        System.out.println("6. DS nhan vien theo phong ban");
 
-                        System.out.println("7. DS nhan vien co luong cao->thap");
-                        System.out.println("8. DS nhan vien theo phong ban");
-
-                        System.out.println("9. Thoat chuong trinh.");
+                        System.out.println("7. Thong tin quan ly phong ban.");
+                        System.out.println("8. Thoat chuong trinh.");
                         System.out.println("===========================");
                         System.out.print("Moi nhap lua chon : ");
 
@@ -136,39 +134,35 @@ public class App {
 
                         switch (chon2) {
                             case 1:
-                                System.out.println("Them phong ban");
-                                dpmSV.addDepartment();
-                                break;
-                            case 2:
                                 System.out.println("Danh sach phong ban");
                                 dpmSV.getAllDepartments();
                                 break;
+                            case 2:
+                                System.out.println("Them phong ban ");
+                                dpmSV.addDepartment();
+                                break;
                             case 3:
-                                System.out.println("Xoa phong ban");
-                                dpmSV.deleteDepartment();
+                                System.out.println("Cap nhat phong ban");
+                                dpmSV.updateDepartment();
                                 break;
                             case 4:
-                                System.out.println("Sua phong ban");
-                                dpmSV.updateDepartment();
+                                System.out.println("Xoa phong ban");
+                                dpmSV.deleteDepartment();
                                 break;
                             case 5:
                                 System.out.println("Phong ban theo ID");
                                 dpmSV.showDepartmentById();
                                 break;
                             case 6:
-                                System.out.println("Tinh thue cua nhan vien");
-                                empSV.calculatePersonalIncomeTax();
-                                break;
-                            case 7:
-                                System.out.println("DS nhan vien luong cao->thap");
-                                empSV.sortEmployeesBySalaryDescending();
-                                break;
-                            case 8:
                                 System.out.println("DS nhan vien theo phong ban");
                                 empSV.getEmployeesByDepartmentId();
                                 break;
-                            case 9:
-                                System.out.println("Dung chuong trinh");
+                            case 7:
+                                System.out.println("Thong tin quan ly theo phong ban");
+                                dpmSV.DepartmentManagerInfo();
+                                break;
+                            case 8:
+                                System.out.println("Thoat");
                                 cond2 = false;
                                 break;
                         }

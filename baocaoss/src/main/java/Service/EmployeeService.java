@@ -65,11 +65,12 @@ public class EmployeeService implements IEmployeeService {
                 return;
             }
         } while (employeeID == null);
-        Employees emp = employeeDAO.deleteEmployee(employeeID);
+        boolean emp = employeeDAO.deleteEmployee(employeeID);
     }
 
     @Override
     public void updateEmployee() {
+        getAllEmployees();
         System.out.print("Nhap ma nhan vien can cap nhat : ");
         Integer employeeID = getValidEmployeeID(sc);
 
@@ -245,6 +246,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void calculatePersonalIncomeTax() {
+        getAllEmployees();
         System.out.print("Nhap ma nhan vien can tinh thue: ");
         Integer employeeID = getValidEmployeeID(sc);
         Employees emp = employeeDAO.showEmployeeById(employeeID);
@@ -267,6 +269,12 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void getEmployeesByDepartmentId() {
+        List<Department> departments = departmentDAO.getAllDepartments();
+        System.out.println("Danh sach phong ban:");
+        for (Department dept : departments) {
+            System.out.println(dept.toString());
+        }
+
         System.out.print("Nhap ma phong ban: ");
         Integer deptID = getValidDeptID(sc);
         List<Employees> employees = employeeDAO.getEmployeesByDepartmentId(deptID);
