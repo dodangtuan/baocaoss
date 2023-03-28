@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class AccountDAO {
     public static Scanner sc = new Scanner(System.in);
+    public boolean loggedIn;
 
     public Account login(String name, String password) {
         Connection conn = null;

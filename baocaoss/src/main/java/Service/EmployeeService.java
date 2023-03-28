@@ -23,7 +23,7 @@ public class EmployeeService implements IEmployeeService {
     public void addEmployee() throws ParseException {
         List<Employees> employees = new ArrayList<>();
         System.out.print("FullName: ");
-        String fullName = sc.nextLine();
+        String fullName = getValidFullName(sc);
         System.out.print("Age: ");
         Integer age = getValidAge(sc);
         System.out.print("Gender: ");
@@ -101,7 +101,7 @@ public class EmployeeService implements IEmployeeService {
             switch (choice) {
                 case 1:
                     System.out.print("Name: ");
-                    String fullName = sc.nextLine();
+                    String fullName = getValidFullName(sc);
                     emp.setFullName(fullName);
                     break;
                 case 2:

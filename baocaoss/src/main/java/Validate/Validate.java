@@ -4,6 +4,20 @@ import java.util.Scanner;
 
 public class Validate {
     public static Scanner sc = new Scanner(System.in);
+
+
+    public static String getValidFullName(Scanner scanner) {
+        String fullName;
+        do {
+            fullName = scanner.nextLine();
+            if (fullName.trim().isEmpty()) {
+                System.out.println("Loi:khong bo trong hoten.");
+                System.out.print("Vui long nhap lai: ");
+            }
+        } while (fullName.trim().isEmpty());
+        return fullName;
+    }
+
     public static int getValidAge(Scanner sc) {
         int age = 0;
         boolean isValid = false;
